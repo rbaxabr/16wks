@@ -1834,9 +1834,6 @@ if (week === 0) return prepWorkouts;
                                         input.focus();
                                         const length = input.value.length;
                                         input.setSelectionRange(length, length);
-                                        // FIX #1: Move cursor to the end of the text
-                                        const length = input.value.length;
-                                        input.setSelectionRange(length, length);
                                         // Also scroll input to show the end
                                         if (input.scrollLeft !== undefined) {
                                             input.scrollLeft = input.scrollWidth;
