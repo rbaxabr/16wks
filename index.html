@@ -305,9 +305,14 @@
                 totalTime: '8-10 min'
             },
             wednesday: {
-                additions: [],
-                why: 'Standard warm-up is perfect for HIIT - no additions needed',
-                totalTime: '8 min'
+                additions: [
+                    'Box Step-ups × 10 each leg',
+                    'Lateral Leg Swings × 10 each',
+                    'Broad Jump × 3 (submaximal)',
+                    'Fast Feet in Place × 20s'
+                ],
+                why: 'Explosive work needs CNS priming and fast-twitch muscle activation',
+                totalTime: '10 min'
             },
             thursday: {
                 additions: [
@@ -479,6 +484,9 @@
             'High Knees': { primary: ['Cardio'], secondary: ['Hip Flexors'] },
             'V-ups': { primary: ['Core'], secondary: [] },
             'Bicycle Crunches': { primary: ['Abs', 'Obliques'], secondary: [] },
+            'Band Sprint Drives': { primary: ['Hip Flexors', 'Quads'], secondary: ['Cardio'] },
+            'Fast Feet Drills': { primary: ['Speed', 'Coordination'], secondary: ['Calves'] },
+            'Banded Hip Rotations': { primary: ['Hip Mobility', 'Glutes'], secondary: [] },
             'Finisher: Ladder Sprint + Burpees': { primary: ['Cardio', 'Full Body'], secondary: [] },
             'Finisher: Ball Slams Circuit': { primary: ['Cardio', 'Core'], secondary: ['Shoulders'] },
             'Copenhagen Plank': { primary: ['Adductors', 'Core'], secondary: ['Obliques'] },
@@ -602,19 +610,20 @@
                 ]
             },
             wednesday: { 
-                name: 'HIIT Conditioning', 
-                duration: '60 min',
-                location: 'stadium',
-                equipmentNeeded: ['Jump rope', 'Sliders', 'Water'],
+                name: 'Explosive Training', 
+                duration: '55 min',
+                location: 'home',
+                equipmentNeeded: [],
                 exercises: [
-                    { name: 'Warm-up Jog', sets: 1, reps: '8 min' },
-                    { name: 'Sprint Intervals', sets: 8, reps: '200m @ 80%', rest: '90s' },
-                    { name: 'Stadium Stairs', sets: 6, reps: 'full climb', rest: '90s' },
-                    { name: 'Jump Rope HIIT', sets: 8, reps: '45s on/45s off' },
-                    { name: 'Slider Mt Climbers', sets: 3, reps: 20, rest: '45s' },
-                    { name: 'Burpees', sets: 3, reps: 10, rest: '60s' },
-                    { name: 'High Plank Hold', sets: 3, reps: '45s', rest: '30s' },
-                    { name: 'Cool-down', sets: 1, reps: '8 min' }
+                    { name: 'Dynamic Warm-up', sets: 1, reps: '8 min' },
+                    { name: 'Box Jumps', sets: 3, reps: 6, rest: '2m', hasWeight: true, defaultWeight: 18 },
+                    { name: 'Broad Jumps', sets: 3, reps: 5, rest: '90s' },
+                    { name: 'Ladder Drills', sets: 5, reps: '2 patterns', rest: '60s' },
+                    { name: 'Band Sprint Drives', sets: 6, reps: '20s', rest: '90s' },
+                    { name: 'Burpee Box Jumps', sets: 3, reps: 6, rest: '75s', hasWeight: true, defaultWeight: 18 },
+                    { name: 'Slider Lateral Lunges', sets: 3, reps: '8 each side', rest: '60s' },
+                    { name: 'Hollow Body Hold', sets: 3, reps: '30s', rest: '45s' },
+                    { name: 'Mobility Cool-down', sets: 1, reps: '5 min' }
                 ]
             },
             thursday: { 
@@ -859,16 +868,21 @@
                 ];
                 
                 // PHASE 2 WEDNESDAY - Intro to explosive work
+                schedule.wednesday.name = 'Explosive Training';
+                schedule.wednesday.duration = '60 min';
+                schedule.wednesday.location = 'home';
+                schedule.wednesday.equipmentNeeded = [];
                 schedule.wednesday.exercises = [
                     { name: 'Dynamic Warm-up', sets: 1, reps: '10 min' },
                     { name: 'Box Jumps', sets: 4, reps: 6, rest: '2m', hasWeight: true, defaultWeight: 20 },
                     { name: 'Ladder Drills', sets: 6, reps: '2 patterns', rest: '60s' },
                     { name: 'Broad Jumps', sets: 4, reps: 5, rest: '90s' },
-                    { name: 'Band Resisted Sprints', sets: 6, reps: '15 yards', rest: '90s' },
+                    { name: 'Band Sprint Drives', sets: 6, reps: '20s', rest: '90s' },
+                    { name: 'Fast Feet Drills', sets: 4, reps: '30s', rest: '60s' },
                     { name: 'Burpee Box Jumps', sets: 3, reps: 8, rest: '75s', hasWeight: true, defaultWeight: 18 },
                     { name: 'Slider Lateral Lunges', sets: 3, reps: '10 each side', rest: '60s' },
                     { name: 'Hollow Body Hold', sets: 3, reps: '30s', rest: '45s' },
-                    { name: 'Cool-down Mobility', sets: 1, reps: '5 min' }
+                    { name: 'Mobility Cool-down', sets: 1, reps: '5 min' }
                 ];
                 
                 
@@ -929,19 +943,23 @@
                     { name: 'Finisher: Ladder Sprint + Burpees', sets: 1, reps: '8 min EMOM' }
                 ];
                 
-                // PHASE 3 WEDNESDAY - Peak explosive power
+                // PHASE 3 WEDNESDAY - Full plyometric program
+                schedule.wednesday.name = 'Explosive Plyometrics';
+                schedule.wednesday.duration = '65 min';
+                schedule.wednesday.location = 'home';
+                schedule.wednesday.equipmentNeeded = [];
                 schedule.wednesday.exercises = [
-                    { name: 'Dynamic Warm-up', sets: 1, reps: '10 min' },
+                    { name: 'Dynamic Warm-up', sets: 1, reps: '12 min' },
                     { name: '180° Box Jumps', sets: 5, reps: 6, rest: '2m', hasWeight: true, defaultWeight: 24 },
-                    { name: 'Ladder Drills', sets: 10, reps: '3 patterns', rest: '60s' },
+                    { name: 'Ladder Drills', sets: 10, reps: '3 patterns', rest: '45s' },
                     { name: 'Depth Jumps', sets: 4, reps: 5, rest: '2m', hasWeight: true, defaultWeight: 24 },
                     { name: 'Lateral Box Shuffles', sets: 4, reps: '12 each side', rest: '75s', hasWeight: true, defaultWeight: 20 },
-                    { name: 'Band Resisted Sprints', sets: 8, reps: '20 yards', rest: '90s' },
-                    { name: 'Burpee Box Jumps', sets: 4, reps: 10, rest: '75s', hasWeight: true, defaultWeight: 20 },
-                    { name: 'Banded Hip Rotations', sets: 3, reps: '20 each direction', rest: '45s' },
-                    { name: 'Slider Lateral Lunges', sets: 3, reps: '15 each side', rest: '60s' },
-                    { name: 'Hollow Body Hold', sets: 4, reps: '45s', rest: '45s' },
-                    { name: 'Cool-down Mobility', sets: 1, reps: '5 min' }
+                    { name: 'Band Sprint Drives', sets: 8, reps: '20s', rest: '90s' },
+                    { name: 'Burpee Box Jumps', sets: 4, reps: 10, rest: '60s', hasWeight: true, defaultWeight: 20 },
+                    { name: 'Banded Hip Rotations', sets: 3, reps: '15 each side', rest: '45s' },
+                    { name: 'Slider Lateral Lunges', sets: 3, reps: '12 each side', rest: '60s' },
+                    { name: 'Hollow Body Hold', sets: 4, reps: '45s', rest: '30s' },
+                    { name: 'Mobility Cool-down', sets: 1, reps: '5 min' }
                 ];
                 
                 // THURSDAY - Upper emphasis full body
@@ -996,19 +1014,22 @@
                     { name: 'Mobility Cool-down', sets: 1, reps: '5 min' }
                 ];
                 
-                // PHASE 4 WEDNESDAY - Maximum reactive power
+                // PHASE 4 WEDNESDAY - Elite explosive training
+                schedule.wednesday.name = 'Elite Explosiveness';
+                schedule.wednesday.duration = '70 min';
+                schedule.wednesday.location = 'home';
+                schedule.wednesday.equipmentNeeded = [];
                 schedule.wednesday.exercises = [
                     { name: 'Dynamic Warm-up', sets: 1, reps: '12 min' },
                     { name: 'Reactive Box Jumps', sets: 6, reps: 5, rest: '2.5m', hasWeight: true, defaultWeight: 24 },
                     { name: 'Sprint Mechanics Drills', sets: 1, reps: '12 min' },
-                    { name: 'Depth Jump to Box Jump', sets: 5, reps: 5, rest: '2m', hasWeight: true, defaultWeight: 24 },
-                    { name: 'Ladder Drills', sets: 12, reps: '3 patterns', rest: '60s' },
-                    { name: 'Band Resisted Sprints', sets: 10, reps: '25 yards', rest: '90s' },
-                    { name: '180° Box Jumps', sets: 4, reps: 6, rest: '90s', hasWeight: true, defaultWeight: 24 },
-                    { name: 'Slider Lateral Lunges', sets: 3, reps: '20 each side', rest: '60s' },
-                    { name: 'L-Sit Hold', sets: 4, reps: '30s', rest: '45s' },
+                    { name: 'Depth Jump to Box Jump', sets: 5, reps: 5, rest: '2.5m', hasWeight: true, defaultWeight: 24 },
+                    { name: 'Ladder Drills', sets: 12, reps: '4 patterns', rest: '45s' },
+                    { name: 'Band Sprint Drives', sets: 10, reps: '25s', rest: '90s' },
+                    { name: '180° Box Jumps', sets: 4, reps: 6, rest: '2m', hasWeight: true, defaultWeight: 24 },
+                    { name: 'L-Sit Hold', sets: 4, reps: '30s', rest: '60s' },
                     { name: 'Hollow Body Hold', sets: 3, reps: '60s', rest: '45s' },
-                    { name: 'Cool-down Mobility', sets: 1, reps: '8 min' }
+                    { name: 'Mobility Cool-down', sets: 1, reps: '8 min' }
                 ];
                 
                 
