@@ -559,8 +559,8 @@
                 0: { name: 'Prep Week', focus: 'Movement prep' },
                 1: { name: 'Foundation', focus: 'Work capacity' },
                 2: { name: 'Strength Building', focus: 'Progressive overload' },
-                3: { name: 'Power & Hypertrophy', focus: 'Peak building' },
-                4: { name: 'Peak Performance', focus: 'Max strength' }
+                3: { name: 'Hypertrophy Peak', focus: 'Maximum muscle growth' },
+                4: { name: 'Peak Performance', focus: 'Elite strength & power' }
             };
             return phases[phase];
         }
@@ -857,6 +857,20 @@
                     { name: 'Plank Hold', sets: 3, reps: '60s', rest: '30s' },
                     { name: 'Stretch', sets: 1, reps: '5 min' }
                 ];
+                
+                // PHASE 2 WEDNESDAY - Intro to explosive work
+                schedule.wednesday.exercises = [
+                    { name: 'Dynamic Warm-up', sets: 1, reps: '10 min' },
+                    { name: 'Box Jumps', sets: 4, reps: 6, rest: '2m', hasWeight: true, defaultWeight: 20 },
+                    { name: 'Ladder Drills', sets: 6, reps: '2 patterns', rest: '60s' },
+                    { name: 'Broad Jumps', sets: 4, reps: 5, rest: '90s' },
+                    { name: 'Band Resisted Sprints', sets: 6, reps: '15 yards', rest: '90s' },
+                    { name: 'Burpee Box Jumps', sets: 3, reps: 8, rest: '75s', hasWeight: true, defaultWeight: 18 },
+                    { name: 'Slider Lateral Lunges', sets: 3, reps: '10 each side', rest: '60s' },
+                    { name: 'Hollow Body Hold', sets: 3, reps: '30s', rest: '45s' },
+                    { name: 'Cool-down Mobility', sets: 1, reps: '5 min' }
+                ];
+                
                 
                 // THURSDAY - Full body with upper emphasis
                 schedule.thursday.exercises[2] = { name: 'KB Snatches', sets: 4, reps: '8 each arm', rest: '2m', hasWeight: true, defaultWeight: 35 };
@@ -1316,7 +1330,9 @@
         function renderOverview(app) {
             const schedule = getWorkoutSchedule(state.currentWeek);
             const phase = getPhase(state.currentWeek);
-            const phaseInfo = getPhaseInfo(phase);
+            const phaseInfo = isDeloadWeek(state.currentWeek) 
+                ? { name: 'DELOAD WEEK', focus: 'Recovery & mobility' }
+                : getPhaseInfo(phase);
             const dateRange = getWeekDateRange(state.currentWeek);
             const currentWeek = getCurrentWeek();
             const weekProgress = getWeekProgress();
@@ -1840,6 +1856,7 @@
                                         value="${currentWeight}"
                                         onchange="saveWeight('${exerciseName}', ${setIndex}, this.value, ${exercise.sets})"
                                         onblur="cancelEdit()"
+                                        onkeydown="handleWeightInputKeydown(event, '${exerciseName}', ${setIndex}, ${exercise.sets})"
                                         class="w-full px-2 py-1 bg-slate-700 border border-blue-500 rounded text-center text-white"
                                         autofocus
                                         id="weight-input-${exerciseName}-${setIndex}"
@@ -1868,17 +1885,38 @@
             }
         }
 
+        
+        function handleWeightInputKeydown(event, exerciseName, setIndex, totalSets) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                const input = event.target;
+                saveWeight(exerciseName, setIndex, input.value, totalSets);
+            } else if (event.key === 'Escape') {
+                event.preventDefault();
+                state.editingSet = null;
+                state.tempWeight = '';
+                render();
+            }
+        }
+        
         function saveWeight(exerciseName, setIndex, value, totalSets) {
             const currentScrollPos = window.pageYOffset;
             const newWeight = parseFloat(value);
+            
+            // Allow exit even if no change or invalid value
             if (!isNaN(newWeight) && newWeight > 0) {
                 const key = `${state.currentWeek}-${exerciseName}-${setIndex}`;
-                state.exerciseWeights[key] = newWeight;
-                // This should update ALL future sets
-                updateFutureSets(exerciseName, setIndex, newWeight, state.currentWeek, totalSets);
-                saveState();
+                const oldWeight = state.exerciseWeights[key];
+                
+                // Only update if value actually changed
+                if (oldWeight !== newWeight) {
+                    state.exerciseWeights[key] = newWeight;
+                    updateFutureSets(exerciseName, setIndex, newWeight, state.currentWeek, totalSets);
+                    saveState();
+                }
             }
             
+            // Always exit edit mode, regardless of whether value changed
             state.editingSet = null;
             state.tempWeight = '';
             
