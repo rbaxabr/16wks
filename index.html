@@ -385,6 +385,108 @@
             }
         };
 
+        const exerciseGuides = {
+            'Band Sprint Drives': {
+                setup: [
+                    'Option 1: Band around ANKLES (harder, recommended)',
+                    'Option 2: Band around KNEES (easier, start here)',
+                    'Stand with feet hip-width apart, slight tension in band'
+                ],
+                execution: [
+                    'Slight forward lean (like starting a sprint)',
+                    'Drive knee EXPLOSIVELY to hip height',
+                    'Alternate rapidly - "DRIVE! DRIVE! DRIVE!"',
+                    'Pump arms in sprint motion (opposite arm/leg)',
+                    'Stay on balls of feet throughout',
+                    'Duration: 20 seconds per set'
+                ],
+                cues: [
+                    'Knee to HIP HEIGHT (thigh parallel)',
+                    'EXPLODE up, control down',
+                    'Quick ground contact',
+                    'Arms pump fast - elbows back'
+                ],
+                progression: 'Week 8: Knees (6×20s) → Weeks 10-13: Ankles (8×20s) → Weeks 15-18: Ankles (10×25s)'
+            },
+            'Fast Feet Drills': {
+                variations: [
+                    '1. Fast Feet in Place: Rapid alternating taps (30s)',
+                    '2. Fast Feet Forward/Back: Small rapid steps forward 3, back 3 (30s)',
+                    '3. Fast Feet Lateral: Side-to-side rapid steps (30s)'
+                ],
+                execution: [
+                    'Stay on balls of feet (NOT flat-footed)',
+                    'Rapid cadence - minimal ground contact',
+                    'Maintain tall posture throughout',
+                    'Athletic stance, slight knee bend'
+                ],
+                cues: [
+                    'Light on your feet!',
+                    'Maximum cadence!',
+                    'Quick! Quick! Quick!',
+                    'If heels touch, too slow'
+                ],
+                format: '4 sets × 30s, cycling through all 3 variations'
+            },
+            'Ladder Drills': {
+                patterns: [
+                    '1. IN-IN-OUT-OUT: Both feet in square, both out to sides, repeat',
+                    '2. ICKEY SHUFFLE: Right in, left out (left), right out (right), left in, repeat',
+                    '3. SINGLE-LEG HOPS (Phase 3+): Hop on one leg per square',
+                    '4. 180° TURNS (Phase 4): Run through, jump 180° every 3 squares'
+                ],
+                cues: [
+                    'SPEED over perfection',
+                    'Eyes UP, not down at ladder',
+                    'Quick ground contact',
+                    'No ladder? Use tape (18" squares)'
+                ],
+                progression: 'Week 8: Patterns 1-2 → Weeks 10-13: Add Pattern 3 → Weeks 15-18: All 4 patterns'
+            },
+            'Copenhagen Plank': {
+                setup: [
+                    'Side plank position on elbow',
+                    'Top leg on bench/box (knee or ankle)',
+                    'Bottom leg hovering off ground',
+                    'Body in straight line'
+                ],
+                execution: [
+                    'Lift bottom leg up toward top leg (adductor squeeze)',
+                    'Hold at top for 20-45 seconds',
+                    'Keep hips elevated - no sagging',
+                    'Switch sides'
+                ],
+                cues: [
+                    'Squeeze inner thighs together',
+                    'Drive top hip toward ceiling',
+                    'Core tight throughout',
+                    'Breathe - don\'t hold breath'
+                ],
+                modification: 'Too hard? Keep bottom knee on ground'
+            },
+            'KB Windmill': {
+                setup: [
+                    'Hold KB overhead in right hand',
+                    'Left foot forward, right foot back 45°',
+                    'Eyes on the kettlebell throughout'
+                ],
+                execution: [
+                    'Push hips to the RIGHT (opposite of KB)',
+                    'Slide left hand down left leg',
+                    'Keep KB vertical and arm locked',
+                    'Return to start, repeat'
+                ],
+                cues: [
+                    'Hips push OPPOSITE direction',
+                    'Never take eyes off KB',
+                    'Arm stays locked overhead',
+                    'This is a HIP hinge, not a side bend'
+                ],
+                safety: 'Start with light weight (10-15 lbs) to learn pattern'
+            }
+        };
+        
+
 
         
         const muscleMappings = {
@@ -1336,6 +1438,76 @@
             }
         }
 
+        
+        function renderExerciseGuide(exerciseName) {
+            const guide = exerciseGuides[exerciseName];
+            if (!guide) return '';
+            
+            let html = '<div class="bg-slate-900 rounded-lg p-4 mt-3 space-y-3">';
+            
+            if (guide.setup) {
+                html += '<div><p class="text-xs text-blue-400 font-semibold mb-2">SETUP:</p>';
+                html += '<ul class="text-xs text-slate-300 space-y-1 ml-4">';
+                guide.setup.forEach(item => html += `<li>• ${item}</li>`);
+                html += '</ul></div>';
+            }
+            
+            if (guide.variations) {
+                html += '<div><p class="text-xs text-green-400 font-semibold mb-2">VARIATIONS:</p>';
+                html += '<ul class="text-xs text-slate-300 space-y-1 ml-4">';
+                guide.variations.forEach(item => html += `<li>${item}</li>`);
+                html += '</ul></div>';
+            }
+            
+            if (guide.patterns) {
+                html += '<div><p class="text-xs text-purple-400 font-semibold mb-2">PATTERNS:</p>';
+                html += '<ul class="text-xs text-slate-300 space-y-1 ml-4">';
+                guide.patterns.forEach(item => html += `<li>${item}</li>`);
+                html += '</ul></div>';
+            }
+            
+            if (guide.execution) {
+                html += '<div><p class="text-xs text-green-400 font-semibold mb-2">EXECUTION:</p>';
+                html += '<ul class="text-xs text-slate-300 space-y-1 ml-4">';
+                guide.execution.forEach(item => html += `<li>• ${item}</li>`);
+                html += '</ul></div>';
+            }
+            
+            if (guide.cues) {
+                html += '<div><p class="text-xs text-yellow-400 font-semibold mb-2">COACHING CUES:</p>';
+                html += '<ul class="text-xs text-slate-300 space-y-1 ml-4">';
+                guide.cues.forEach(item => html += `<li>💡 ${item}</li>`);
+                html += '</ul></div>';
+            }
+            
+            if (guide.progression) {
+                html += '<div class="pt-2 border-t border-slate-700">';
+                html += `<p class="text-xs text-slate-400 italic">📈 ${guide.progression}</p>`;
+                html += '</div>';
+            }
+            
+            if (guide.format) {
+                html += '<div class="pt-2 border-t border-slate-700">';
+                html += `<p class="text-xs text-blue-300">📋 ${guide.format}</p>`;
+                html += '</div>';
+            }
+            
+            if (guide.modification) {
+                html += '<div class="pt-2 border-t border-slate-700">';
+                html += `<p class="text-xs text-orange-400">⚡ ${guide.modification}</p>`;
+                html += '</div>';
+            }
+            
+            if (guide.safety) {
+                html += '<div class="pt-2 border-t border-slate-700">';
+                html += `<p class="text-xs text-red-400">⚠️ ${guide.safety}</p>`;
+                html += '</div>';
+            }
+            
+            html += '</div>';
+            return html;
+        }
+        
         function render() {
             const app = document.getElementById('app');
             
@@ -1512,12 +1684,13 @@
                                         ${(() => {
                                             const isDynamicWarmup = exercise.name === 'Dynamic Warm-up';
                                             const isFinisher = exercise.name.startsWith('Finisher:');
+                                            const hasExerciseGuide = exerciseGuides[exercise.name];
                                             const warmupGuide = isDynamicWarmup ? warmupGuides[state.selectedDay] : null;
                                             const finisherGuide = isFinisher ? finisherGuides[exercise.name] : null;
                                             const expandId = `${state.currentWeek}-${state.selectedDay}-${exIndex}`;
                                             const isExpanded = state.expandedItems[expandId] || false;
                                             
-                                            if (!isDynamicWarmup && !isFinisher) return '';
+                                            if (!isDynamicWarmup && !isFinisher && !hasExerciseGuide) return '';
                                             
                                             return `
                                                 <button 
@@ -1525,7 +1698,7 @@
                                                     class="mt-2 text-xs text-blue-400 hover:text-blue-300 flex items-center gap-1"
                                                 >
                                                     <span id="icon-${expandId}" class="expand-icon ${isExpanded ? 'rotated' : ''}">▼</span>
-                                                    ${isDynamicWarmup ? 'View Warm-up Guide' : 'View Finisher Details'}
+                                                    ${isDynamicWarmup ? 'View Warm-up Guide' : isFinisher ? 'View Finisher Details' : 'How to Perform'}
                                                 </button>
                                                 ${isDynamicWarmup && warmupGuide ? `
                                                     <div id="expand-${expandId}" class="expandable-content ${isExpanded ? 'expanded' : ''} mt-3 pt-3 border-t border-slate-700">
@@ -1555,6 +1728,11 @@
                                                                 <p class="text-xs text-yellow-400 mt-1">⏱️ Total time: ${warmupGuide.totalTime}</p>
                                                             </div>
                                                         </div>
+                                                    </div>
+                                                ` : ''}
+                                                ${hasExerciseGuide && !isDynamicWarmup && !isFinisher ? `
+                                                    <div id="expand-${expandId}" class="expandable-content ${isExpanded ? 'expanded' : ''} mt-3 pt-3 border-t border-slate-700">
+                                                        ${renderExerciseGuide(exercise.name)}
                                                     </div>
                                                 ` : ''}
                                                 ${isFinisher && finisherGuide ? `
